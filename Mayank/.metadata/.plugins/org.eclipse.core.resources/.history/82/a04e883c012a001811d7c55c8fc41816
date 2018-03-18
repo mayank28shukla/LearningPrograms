@@ -1,0 +1,90 @@
+package com.here.sqe.Metrication;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.LogStatus;
+
+import utils.Utility;
+
+
+public class VerifyTitle
+{
+	WebDriver driver;
+	String title, screenshot_path, image;
+	
+	@BeforeMethod
+	public void visitFacebookHomePage(Method method)
+	{
+		Utility.reportCreation(method);
+		
+		System.setProperty("webdriver.chrome.driver", "E:\\chromedriver.exe");
+		driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		Utility.logger.log(LogStatus.INFO, "Browser Started");
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	}
+	
+	@Test(description="Verify Title")
+	public void checkTitle()
+	{
+		driver.get("https://www.facebook.com/");
+		Utility.logger.log(LogStatus.INFO, "Visited Facebook.com");
+		Utility.logger.log(LogStatus.INFO, "Application is up and running");
+		title=driver.getTitle();
+		Assert.assertTrue(title.contains("Facebook"));
+	}
+	
+	@Test(description="Verify Google")
+	public void checkGoogleTitle()
+	{
+		driver.get("https://www.google.com");
+		Utility.logger.log(LogStatus.INFO, "Visited Google Page");
+		Utility.logger.log(LogStatus.INFO, "Application is up and running");
+		
+		title=driver.getTitle();
+		Assert.assertTrue(title.contains("Google"));
+	}
+	
+	@AfterMethod
+	public void tearDown(ITestResult result, Method method)
+	{
+		if(result.getStatus()==ITestResult.FAILURE)
+		{
+			screenshot_path=Utility.captureScreenshot(driver, result.getName());
+			image=Utility.logger.addScreenCapture(screenshot_path);
+			Utility.logger.log(LogStatus.FAIL, method.getAnnotation(Test.class).description(), image);
+		}
+		else if(result.getStatus()==ITestResult.SUCCESS)
+		{
+			screenshot_path=Utility.captureScreenshot(driver, "Verify Google Title");
+			image=Utility.logger.addScreenCapture(screenshot_path);
+			Utility.logger.log(LogStatus.PASS, method.getAnnotation(Test.class).description(), image);
+		}
+		else
+		{
+			screenshot_path=Utility.captureScreenshot(driver, "Verify Google Title");
+			image=Utility.logger.addScreenCapture(screenshot_path);
+			Utility.logger.log(LogStatus.SKIP, method.getAnnotation(Test.class).description(), image);
+		}
+		Utility.report.endTest(Utility.logger);
+		Utility.report.flush();
+		driver.close();
+	}
+	
+	@AfterTest
+	public void afterTest()
+	{
+		driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("E:\\EclipseOxygen\\Mayank\\TestReport.html");
+	}
+}

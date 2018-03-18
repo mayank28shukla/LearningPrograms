@@ -1,0 +1,79 @@
+package com.here.sqe.Metrication;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class FacebookLogin
+{
+	static WebDriver driver;
+	static Logger logger;
+	
+	@BeforeMethod
+	public static void visitFacebookHomePage(Method method)
+	{
+		logger = Logger.getLogger(method.getAnnotation(Test.class).description());
+		PropertyConfigurator.configure("Log4j.properties");
+		
+		System.setProperty("webdriver.chrome.driver", "E:\\chromedriver.exe");
+		driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get("https://www.facebook.com/");
+		logger.info("Visited Facebook Homepage");
+	}
+	
+	@AfterMethod
+	public static void closeBrowser()
+	{
+		//driver.close();
+	}
+	
+	@Test(description="Facebook Login Page")
+	public static void login()
+	{
+		driver.findElement(By.xpath("//input[@type='email']")).sendKeys("mmshukla.shukla@gmail.com");
+		driver.findElement(By.xpath("//input[@name='pass']")).sendKeys("mayanktilakdhari");
+		logger.info("Entered Username and Password");
+		driver.findElement(By.xpath("//input[@type='submit']")).click();
+
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+			    .withTimeout(30, TimeUnit.SECONDS)
+			    .pollingEvery(5, TimeUnit.SECONDS)
+			    .ignoring(NoSuchElementException.class);
+
+		WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				WebElement element = driver.findElement(By.xpath("//div[@class='_3ixn']"));
+				  if(element.isDisplayed())
+					{
+						Actions act=new Actions(driver);
+						act.sendKeys(Keys.ESCAPE).perform();
+					}
+				  return null;
+			}
+			});
+		
+		
+		driver.findElement(By.xpath("//a[@title='Profile']")).click();
+		String homepageURL="https://www.facebook.com/mayank.shukla.7355";
+		Assert.assertEquals(driver.getCurrentUrl(), homepageURL);
+		logger.info("Logged in Successfully");
+	}
+}

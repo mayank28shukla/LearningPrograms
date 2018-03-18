@@ -1,0 +1,32 @@
+package com.here.sqe.Metrication;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class FacebookLogin
+{
+	@BeforeMethod
+	public void visitFacebookHomePage(Method method)
+	{
+		Logger logger = Logger.getLogger(method.getAnnotation(Test.class).description());
+		PropertyConfigurator.configure("Log4j.properties");
+		WebDriver driver;
+		System.setProperty("webdriver.chrome.driver", "E:\\chromedriver.exe");
+		driver=new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get("www.facebook.com");
+		logger.info("Visited Facebook Homepage");
+	}
+	@Test(description="Facebook Login Page")
+	public void login()
+	{
+		
+	}
+}

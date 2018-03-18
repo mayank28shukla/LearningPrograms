@@ -1,0 +1,80 @@
+package com.here.sqe.Metrication;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+import utils.Utility;
+
+
+public class VerifyTitle
+{
+	WebDriver driver;
+	ExtentReports report;
+	ExtentTest logger;
+	String title, screenshot_path, image;
+	
+	@BeforeMethod
+	public void visitFacebookHomePage(Method method)
+	{
+		report=new ExtentReports("E:\\EclipseOxygen\\Mayank\\TestReport.html", false);
+		logger=report.startTest(method.getAnnotation(Test.class).description());
+		
+		System.setProperty("webdriver.chrome.driver", "E:\\chromedriver.exe");
+		driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		logger.log(LogStatus.INFO, "Browser Started");
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	}
+	
+	@Test(description="Verify Title")
+	public void checkTitle()
+	{
+		driver.get("https://www.facebook.com/");
+		logger.log(LogStatus.INFO, "Visited Facebook.com");
+		logger.log(LogStatus.INFO, "Application is up and running");
+		title=driver.getTitle();
+		Assert.assertTrue(title.contains("Facebook"));
+		screenshot_path=Utility.captureScreenshot(driver, "Verify Title");
+		image=logger.addScreenCapture(screenshot_path);
+		logger.log(LogStatus.PASS, "Title Verified", image);
+	}
+	
+	@Test(description="Verify Google")
+	public void checkGoogleTitle()
+	{
+		driver.get("https://www.google.com");
+		logger.log(LogStatus.INFO, "Visited Google Page");
+		logger.log(LogStatus.INFO, "Application is up and running");
+		
+		title=driver.getTitle();
+		Assert.assertTrue(title.contains("Google"));
+		screenshot_path=Utility.captureScreenshot(driver, "Verify Google Title");
+		image=logger.addScreenCapture(screenshot_path);
+		logger.log(LogStatus.PASS, "Google Title Verified");
+	}
+	
+	@AfterMethod
+	public void tearDown(ITestResult result, Method method)
+	{
+		if(result.getStatus()==ITestResult.FAILURE)
+		{
+			String screenshot=Utility.captureScreenshot(driver, result.getName());
+			logger.log(LogStatus.FAIL, method.getAnnotation(Test.class).description(),screenshot);
+		}
+		report.endTest(logger);
+		report.flush();
+		
+		driver.get("E:\\EclipseOxygen\\Mayank\\TestReport.html");
+	}
+}

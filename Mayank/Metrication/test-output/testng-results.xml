@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="68567" started-at="2018-03-17T17:29:15Z" finished-at="2018-03-17T17:30:24Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="68567" started-at="2018-03-17T17:29:15Z" finished-at="2018-03-17T17:30:24Z">
+      <class name="com.here.sqe.Metrication.VerifyTitle">
+        <test-method status="PASS" signature="visitFacebookHomePage(java.lang.reflect.Method)[pri:0, instance:com.here.sqe.Metrication.VerifyTitle@6093dd95]" name="visitFacebookHomePage" is-config="true" duration-ms="5117" started-at="2018-03-17T17:29:15Z" finished-at="2018-03-17T17:29:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.here.sqe.Metrication.VerifyTitle.checkGoogleTitle()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- visitFacebookHomePage -->
+        <test-method status="PASS" signature="checkGoogleTitle()[pri:0, instance:com.here.sqe.Metrication.VerifyTitle@6093dd95]" name="checkGoogleTitle" duration-ms="27454" started-at="2018-03-17T17:29:20Z" description="Verify Google" finished-at="2018-03-17T17:29:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkGoogleTitle -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult, java.lang.reflect.Method)[pri:0, instance:com.here.sqe.Metrication.VerifyTitle@6093dd95]" name="tearDown" is-config="true" duration-ms="2914" started-at="2018-03-17T17:29:48Z" finished-at="2018-03-17T17:29:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=checkGoogleTitle status=SUCCESS method=VerifyTitle.checkGoogleTitle()[pri:0, instance:com.here.sqe.Metrication.VerifyTitle@6093dd95] output={null}]]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[public void com.here.sqe.Metrication.VerifyTitle.checkGoogleTitle()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="visitFacebookHomePage(java.lang.reflect.Method)[pri:0, instance:com.here.sqe.Metrication.VerifyTitle@6093dd95]" name="visitFacebookHomePage" is-config="true" duration-ms="3822" started-at="2018-03-17T17:29:51Z" finished-at="2018-03-17T17:29:54Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.here.sqe.Metrication.VerifyTitle.checkTitle()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- visitFacebookHomePage -->
+        <test-method status="PASS" signature="checkTitle()[pri:0, instance:com.here.sqe.Metrication.VerifyTitle@6093dd95]" name="checkTitle" duration-ms="20217" started-at="2018-03-17T17:29:54Z" description="Verify Title" finished-at="2018-03-17T17:30:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkTitle -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult, java.lang.reflect.Method)[pri:0, instance:com.here.sqe.Metrication.VerifyTitle@6093dd95]" name="tearDown" is-config="true" duration-ms="2711" started-at="2018-03-17T17:30:15Z" finished-at="2018-03-17T17:30:17Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=checkTitle status=SUCCESS method=VerifyTitle.checkTitle()[pri:0, instance:com.here.sqe.Metrication.VerifyTitle@6093dd95] output={null}]]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[public void com.here.sqe.Metrication.VerifyTitle.checkTitle()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.here.sqe.Metrication.VerifyTitle@6093dd95]" name="afterTest" is-config="true" duration-ms="6294" started-at="2018-03-17T17:30:17Z" finished-at="2018-03-17T17:30:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- com.here.sqe.Metrication.VerifyTitle -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
