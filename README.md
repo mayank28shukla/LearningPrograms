@@ -1,5 +1,6 @@
 
 Hi Krishna, 
+  
 To click inside canvas, we have to use x-,y- coordinates.  
 In order to get x-, y- coordinates, follow the below steps: 
 1. Find an xpath of any element outside the canvas, and use ``` moveToElement(element) ``` function to move cursor to that particular element. 
